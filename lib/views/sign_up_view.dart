@@ -8,7 +8,7 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -58,7 +58,7 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(height: 50),
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "Senha",
+                          labelText: "Data de Nascimento",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 2),
                           ),
@@ -67,7 +67,7 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(height: 50),
                       TextFormField(
                         decoration: InputDecoration(
-                          labelText: "Data de Nascimento",
+                          labelText: "Senha",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 2),
                           ),
