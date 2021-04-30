@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:labweb/controllers/form_controller.dart';
 import 'package:labweb/views/sign_up_view.dart';
 
 void main() {
@@ -30,11 +31,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
+  final controller = FormController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("LOGIN")),
+        title: Center(
+          child: Text(
+            "LOGIN",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
@@ -47,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: controller.isEmailValid,
                       decoration: InputDecoration(
                         labelText: "Email",
                         border: OutlineInputBorder(
@@ -56,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     SizedBox(height: 50),
                     TextFormField(
+                      validator: controller.isPasswordValid,
                       decoration: InputDecoration(
                         labelText: "Senha",
                         border: OutlineInputBorder(
@@ -75,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 autofocus: true,
                 child: Text(
                   "LOGIN",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () {},
               ),
@@ -88,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 autofocus: true,
                 child: Text(
                   "CADASTRAR",
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () => Navigator.pushNamed(context, "/signUp"),
               ),
