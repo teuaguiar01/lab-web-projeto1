@@ -8,14 +8,7 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -94,7 +87,7 @@ class _SignUpViewState extends State<SignUpView> {
                     "CADASTRAR",
                     style: TextStyle(fontSize: 20),
                   ),
-                  onPressed: () => Navigator.pushNamed(context, "/signUp"),
+                  onPressed: () {},
                 ),
               ),
             ],
