@@ -98,7 +98,9 @@ class _SignUpViewState extends State<SignUpView> {
                     "CADASTRAR",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _formKey.currentState.validate();
+                  },
                 ),
               ),
             ],
