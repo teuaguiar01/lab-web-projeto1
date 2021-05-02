@@ -26,13 +26,13 @@ export class AuthController {
     const user = await this.userService.getByUsername(username);
 
     if (user) {
-      const { id, password } = user;
+      const { password } = user;
 
       if (loginDTOPassword === password) {
         return {
           success: true,
           data: {
-            id,
+            username,
           },
           error: null,
         };

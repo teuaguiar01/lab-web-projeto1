@@ -3,7 +3,7 @@ import {
   Controller,
   Post,
   Body,
-  InternalServerErrorException
+  BadRequestException
 } from '@nestjs/common';
 
 // Services
@@ -18,7 +18,11 @@ export class UserController {
 
   @Post('user/create')
   async create(@Body() createUserDTO: CreateUserDTO) {
-    try {
+    const { username } = createUserDTO;
+
+    const user = await this.userService.getByUsername(username);
+
+    if (!user) {
       this.userService.create(createUserDTO);
 
       return {
@@ -26,14 +30,14 @@ export class UserController {
         data: null,
         error: null,
       };
-    } catch(error) {
-      throw new InternalServerErrorException({
-        success: false,
-        data: null,
-        error: {
-          message: 'Oops... Houve algum problema. Tente novamente mais tarde.'
-        },
-      })
     }
+
+    throw new BadRequestException({
+      success: false,
+      data: null,
+      error: {
+        message: 'Usuário existente.',
+      },
+    })
   }
 }

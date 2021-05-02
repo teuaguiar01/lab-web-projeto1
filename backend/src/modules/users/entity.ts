@@ -1,11 +1,8 @@
 // Dependencies
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class UserEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
   @Column()
   firstName: string;
 
@@ -18,7 +15,7 @@ export class UserEntity {
   @Column()
   email: string;
 
-  @Column()
+  @PrimaryColumn()
   username: string;
 
   @Column()
