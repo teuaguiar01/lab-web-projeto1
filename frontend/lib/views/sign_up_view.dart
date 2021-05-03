@@ -10,6 +10,9 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   final controller = FormController();
+  String password = "";
+  bool isPasswordObscure = true;
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -76,14 +79,23 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
+                        initialValue: password,
+                        onChanged: _setPassword,
                         validator: controller.isPasswordValid,
+                        obscureText: isPasswordObscure,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(isPasswordObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: _toggleIsPasswordObscure,
+                          ),
                           labelText: "Senha",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(width: 2),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -108,5 +120,12 @@ class _SignUpViewState extends State<SignUpView> {
         ),
       ),
     );
+  }
+
+  _setPassword(String s) => password = s;
+  _toggleIsPasswordObscure() {
+    setState(() {
+      isPasswordObscure = !isPasswordObscure;
+    });
   }
 }

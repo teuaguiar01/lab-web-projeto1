@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(),
         '/signUp': (context) => SignUpView(),
       },
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
@@ -32,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
   final controller = FormController();
+  String password = "";
+  bool isPasswordObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: [
                     TextFormField(
-                      validator: controller.isEmailValid,
+                      // validator: controller.isEmailValid,
                       decoration: InputDecoration(
                         labelText: "Email",
                         border: OutlineInputBorder(
@@ -65,8 +68,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     SizedBox(height: 50),
                     TextFormField(
+                      initialValue: password,
+                      onChanged: _setPassword,
                       validator: controller.isPasswordValid,
+                      obscureText: isPasswordObscure,
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(isPasswordObscure
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: _toggleIsPasswordObscure,
+                        ),
                         labelText: "Senha",
                         border: OutlineInputBorder(
                           borderSide: BorderSide(width: 2),
@@ -84,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ElevatedButton(
                 autofocus: true,
                 child: Text(
-                  "LOGIN",
+                  "ENTRAR",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () {},
@@ -107,5 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  _setPassword(String s) => password = s;
+  _toggleIsPasswordObscure() {
+    setState(() {
+      isPasswordObscure = !isPasswordObscure;
+    });
   }
 }
