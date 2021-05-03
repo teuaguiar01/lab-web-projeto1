@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:labweb/controllers/form_controller.dart';
 
+import '../models/user_model.dart';
+
 class SignUpView extends StatefulWidget {
   SignUpView({Key key}) : super(key: key);
 
@@ -12,15 +14,16 @@ class _SignUpViewState extends State<SignUpView> {
   final controller = FormController();
   String password = "";
   bool isPasswordObscure = true;
+  final model = UserModel();
 
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
     signUpHandle() {
-      if (_formKey.currentState.validate()) {
-        print(":)");
-      }
+      // if (_formKey.currentState.validate()) {
+      controller.registerUser(model);
+      //
     }
 
     return Scaffold(
@@ -46,6 +49,7 @@ class _SignUpViewState extends State<SignUpView> {
                   child: Column(
                     children: [
                       TextFormField(
+                        onSaved: (s) => model.name = s,
                         validator: controller.isNameValid,
                         decoration: InputDecoration(
                           labelText: "Nome",
@@ -56,6 +60,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
+                        onSaved: (s) => model.surname = s,
                         validator: controller.isNameValid,
                         decoration: InputDecoration(
                           labelText: "Sobrenome",
@@ -66,6 +71,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
+                        onSaved: (s) => model.email = s,
                         validator: controller.isEmailValid,
                         decoration: InputDecoration(
                           labelText: "Email",
@@ -76,7 +82,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        //validator???
+                        onSaved: (s) => model.birth = s,
                         decoration: InputDecoration(
                           labelText: "Data de Nascimento",
                           border: OutlineInputBorder(
@@ -86,6 +92,17 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
+                        onSaved: (s) => model.username = s,
+                        decoration: InputDecoration(
+                          labelText: "Usuário",
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(width: 2),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 50),
+                      TextFormField(
+                        onSaved: (s) => model.password = s,
                         initialValue: password,
                         onChanged: _setPassword,
                         validator: controller.isPasswordValid,
