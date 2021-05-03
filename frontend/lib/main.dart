@@ -122,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _setPassword(String s) => password = s;
+
   _toggleIsPasswordObscure() {
     setState(() {
       isPasswordObscure = !isPasswordObscure;

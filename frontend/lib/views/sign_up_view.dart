@@ -16,6 +16,13 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+
+    signUpHandle() {
+      if (_formKey.currentState.validate()) {
+        print(":)");
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -85,9 +92,11 @@ class _SignUpViewState extends State<SignUpView> {
                         obscureText: isPasswordObscure,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            icon: Icon(isPasswordObscure
-                                ? Icons.visibility_off
-                                : Icons.visibility),
+                            icon: Icon(
+                              isPasswordObscure
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
                             onPressed: _toggleIsPasswordObscure,
                           ),
                           labelText: "Senha",
@@ -110,9 +119,7 @@ class _SignUpViewState extends State<SignUpView> {
                     "CADASTRAR",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
-                  onPressed: () {
-                    _formKey.currentState.validate();
-                  },
+                  onPressed: signUpHandle,
                 ),
               ),
             ],
