@@ -12,7 +12,6 @@ class SignUpView extends StatefulWidget {
 
 class _SignUpViewState extends State<SignUpView> {
   final controller = FormController();
-  String password = "";
   bool isPasswordObscure = true;
   final model = UserModel();
 
@@ -21,9 +20,9 @@ class _SignUpViewState extends State<SignUpView> {
     final _formKey = GlobalKey<FormState>();
 
     signUpHandle() {
-      // if (_formKey.currentState.validate()) {
-      controller.registerUser(model);
-      //
+      if (_formKey.currentState.validate()) {
+        controller.registerUser(model);
+      }
     }
 
     return Scaffold(
@@ -49,7 +48,8 @@ class _SignUpViewState extends State<SignUpView> {
                   child: Column(
                     children: [
                       TextFormField(
-                        onSaved: (s) => model.name = s,
+                        initialValue: model.name,
+                        onChanged: (s) => model.name = s,
                         validator: controller.isNameValid,
                         decoration: InputDecoration(
                           labelText: "Nome",
@@ -60,7 +60,8 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        onSaved: (s) => model.surname = s,
+                        initialValue: model.surname,
+                        onChanged: (s) => model.surname = s,
                         validator: controller.isNameValid,
                         decoration: InputDecoration(
                           labelText: "Sobrenome",
@@ -71,7 +72,8 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        onSaved: (s) => model.email = s,
+                        initialValue: model.email,
+                        onChanged: (s) => model.email = s,
                         validator: controller.isEmailValid,
                         decoration: InputDecoration(
                           labelText: "Email",
@@ -82,7 +84,8 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        onSaved: (s) => model.birth = s,
+                        initialValue: model.birth,
+                        onChanged: (s) => model.birth = s,
                         decoration: InputDecoration(
                           labelText: "Data de Nascimento",
                           border: OutlineInputBorder(
@@ -92,7 +95,8 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        onSaved: (s) => model.username = s,
+                        onChanged: (s) => model.username = s,
+                        initialValue: model.username,
                         decoration: InputDecoration(
                           labelText: "Usuário",
                           border: OutlineInputBorder(
@@ -102,9 +106,8 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       SizedBox(height: 50),
                       TextFormField(
-                        onSaved: (s) => model.password = s,
-                        initialValue: password,
-                        onChanged: _setPassword,
+                        onChanged: (s) => model.password = s,
+                        initialValue: model.password,
                         validator: controller.isPasswordValid,
                         obscureText: isPasswordObscure,
                         decoration: InputDecoration(
@@ -146,7 +149,6 @@ class _SignUpViewState extends State<SignUpView> {
     );
   }
 
-  _setPassword(String s) => password = s;
   _toggleIsPasswordObscure() {
     setState(() {
       isPasswordObscure = !isPasswordObscure;
