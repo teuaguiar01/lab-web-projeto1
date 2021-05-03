@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:labweb/controllers/form_controller.dart';
+import 'package:labweb/controllers/login_controller.dart';
 import 'package:labweb/views/sign_up_view.dart';
 
 void main() {
@@ -32,9 +32,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
-  final controller = FormController();
+  final controller = LoginController();
+
   String password = "";
   bool isPasswordObscure = true;
+  String user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: [
                     TextFormField(
-                      // validator: controller.isEmailValid,
+                      onChanged: (s) => user = s,
+                      initialValue: user,
                       decoration: InputDecoration(
-                        labelText: "Email",
+                        labelText: "Usuário",
                         border: OutlineInputBorder(
                           borderSide: BorderSide(width: 2),
                         ),
@@ -69,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(height: 50),
                     TextFormField(
                       initialValue: password,
-                      onChanged: _setPassword,
+                      onChanged: (s) => password = s,
                       validator: controller.isPasswordValid,
                       obscureText: isPasswordObscure,
                       decoration: InputDecoration(
@@ -99,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "ENTRAR",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: loginHandle,
               ),
             ),
             SizedBox(height: 50),
@@ -121,7 +124,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _setPassword(String s) => password = s;
+  loginHandle() {
+    if (_formKey.currentState.validate()) {
+      controller.login(user, password);
+    }
+  }
 
   _toggleIsPasswordObscure() {
     setState(() {
