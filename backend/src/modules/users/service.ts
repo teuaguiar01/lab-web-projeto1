@@ -10,7 +10,7 @@ import { UserEntity } from './entity';
 import { CreateUserDTO } from './dtos';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   private readonly _userRepository: Repository<UserEntity>;
 
   constructor(

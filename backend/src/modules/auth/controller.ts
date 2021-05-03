@@ -9,21 +9,21 @@ import {
 } from '@nestjs/common';
 
 // Services
-import { UserService } from '../users/service';
+import { UsersService } from '../users/service';
 
 // DTO's
 import { LoginDTO } from './dtos';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('login')
   @HttpCode(200)
   async login(@Body() loginDTO: LoginDTO) {
     const { username, password: loginDTOPassword } = loginDTO;
 
-    const user = await this.userService.getByUsername(username);
+    const user = await this.usersService.getByUsername(username);
 
     if (user) {
       const { password } = user;

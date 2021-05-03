@@ -2,13 +2,13 @@
 import { Module } from '@nestjs/common';
 
 // Modules
-import { UserModule } from '../users';
+import { UsersModule } from '../users';
 
 // Controllers
 import { AuthController } from './controller';
 
 @Module({
-  imports: [UserModule],
+  imports: [UsersModule],
   controllers: [AuthController],
 })
 

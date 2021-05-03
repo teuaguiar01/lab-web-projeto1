@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Modules
-import { UserModule, AuthModule } from './modules';
+import { UsersModule, AuthModule } from './modules';
 
 // Entities
 import { UserEntity } from './modules/users/entity';
@@ -16,7 +16,7 @@ import { UserEntity } from './modules/users/entity';
       entities: [UserEntity],
       synchronize: true,
     }),
-    UserModule,
+    UsersModule,
     AuthModule,
   ],
 })

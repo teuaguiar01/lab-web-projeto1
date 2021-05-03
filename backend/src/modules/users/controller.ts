@@ -7,23 +7,23 @@ import {
 } from '@nestjs/common';
 
 // Services
-import { UserService } from './service';
+import { UsersService } from './service';
 
 // DTO's
 import { CreateUserDTO } from './dtos';
 
-@Controller()
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
 
-  @Post('user/create')
+  @Post()
   async create(@Body() createUserDTO: CreateUserDTO) {
     const { username } = createUserDTO;
 
-    const user = await this.userService.getByUsername(username);
+    const user = await this.usersService.getByUsername(username);
 
     if (!user) {
-      this.userService.create(createUserDTO);
+      this.usersService.create(createUserDTO);
 
       return {
         success: true,
