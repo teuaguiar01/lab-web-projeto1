@@ -19,9 +19,13 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
-    signUpHandle() {
+    signUpHandle() async {
       if (_formKey.currentState.validate()) {
-        controller.registerUser(model);
+        final statusCode = await controller.registerUser(model);
+        if (statusCode == 201)
+          _showSuccessDialog();
+        else
+          _showErrorDialog();
       }
     }
 
@@ -146,6 +150,64 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         ),
       ),
+    );
+  }
+
+  _showErrorDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Usuário já cadastrado"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "Esse usuário já se encontra criado, favor tente um novo",
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text("Entendi"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _showSuccessDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Usuário cadastrado com sucesso"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "Parabéns, utilize bem nosso site",
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text("Entendi"),
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

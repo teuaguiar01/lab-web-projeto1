@@ -40,6 +40,6 @@ class UserModel {
         "email": email,
         "password": password,
         "birthdayDate": birth,
-        "username": username,
+        "username": username
       };
 }

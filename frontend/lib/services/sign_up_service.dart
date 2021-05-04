@@ -1,15 +1,22 @@
+import 'package:dio/dio.dart';
+
 import '../models/user_model.dart';
-import 'package:http/http.dart' as http;
 
 class SignUpService {
   registerUser(UserModel user) async {
     try {
-      var baseUrl = Uri.parse("http://localhost:3000/users");
-      var response = await http.post(baseUrl, body: user.toJson());
-      return response;
+      final dio = Dio();
+
+      Response response = await dio.post(
+        "http://localhost:3000/users",
+        data: user.toJson(),
+      );
+
+      return response.statusCode;
     } catch (error, stackTrace) {
       print(error);
       print(stackTrace);
+      return null;
     }
   }
 }
