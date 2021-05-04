@@ -105,7 +105,10 @@ class _LoginViewState extends State<LoginView> {
   loginHandle() async {
     if (_formKey.currentState.validate()) {
       final statusCode = await controller.login(user, password);
-      print(statusCode);
+      if (statusCode == 200)
+        Navigator.pushNamed(context, "/home");
+      else
+        _showMyDialog();
     }
   }
 
@@ -113,5 +116,34 @@ class _LoginViewState extends State<LoginView> {
     setState(() {
       isPasswordObscure = !isPasswordObscure;
     });
+  }
+
+  _showMyDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Usuário não encontrado"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "Não encontramos esse usuário na nossa base de dados, favor cadastre-o",
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text("Entendi"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

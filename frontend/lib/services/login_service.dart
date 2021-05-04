@@ -13,6 +13,7 @@ class LoginService {
     } catch (error, stackTrace) {
       print(error);
       print(stackTrace);
+      return null;
     }
   }
 }

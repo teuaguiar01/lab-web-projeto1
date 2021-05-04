@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:labweb/views/home_view.dart';
 import 'package:labweb/views/login_view.dart';
 import 'package:labweb/views/sign_up_view.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginView(),
         '/signUp': (context) => SignUpView(),
+        '/home': (context) => HomeView(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
