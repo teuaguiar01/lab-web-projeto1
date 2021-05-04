@@ -1,20 +1,18 @@
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class LoginService {
   login(String user, String password) async {
     try {
-      var url = Uri.parse("http://localhost:3000/auth/login");
+      final dio = Dio();
 
       final body = {"username": user, "password": password};
 
-      var response = await http.post(url, body: body);
-      return response;
-      //TODO pop quando der tudo certo
+      Response response =
+          await dio.post("http://localhost:3000/auth/login", data: body);
+      return response.statusCode;
     } catch (error, stackTrace) {
       print(error);
       print(stackTrace);
-      //TODO mostrar erro
-
     }
   }
 }

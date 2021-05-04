@@ -37,7 +37,7 @@ class _SignUpViewState extends State<SignUpView> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(100.0),
+          padding: const EdgeInsets.all(50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
