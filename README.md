@@ -45,13 +45,12 @@ $ npm start
 $ cd frontend
 
 # Instale as dependências
-$ npm install
-$ npm i --save @nestjs/typeorm typeorm sqlite3
+$ flutter pub get
 
 # Execute a aplicação em modo de desenvolvimento
-$ npm start
+$ flutter run -d chrome
 
-# O servidor inciará na porta:3333 - acesse <http://localhost:3333>
+Espere o navegador abrir
 ```
 
-#### 🚀 Bora codar!
+## 🚀 Bora codar!
